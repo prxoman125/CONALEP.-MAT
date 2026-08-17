@@ -10,16 +10,25 @@ st.set_page_config(
     layout="centered",
     initial_sidebar_state="collapsed"
 )
+# 1. Configuración de página obligatoria (SIEMPRE DE PRIMERO)
 st.set_page_config(layout="wide")
 
-# Aplica un zoom/escala simulada del 67%
+# 2. Tu código de zoom mejorado para evitar recortes
 st.html("""
 <style>
-html {
+html, body {
     zoom: 0.67;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-y: auto !important;
+}
+.stApp {
+    height: 100vh !important;
 }
 </style>
 """)
+ 
 # Forzar modo oscuro + ocultar Share y GitHub
 st.markdown("""
     <style>
