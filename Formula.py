@@ -11,16 +11,16 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 st.markdown("""
-    <meta name="viewport" content="width=device-width, initial-scale=0.67">
+    <meta name="viewport" content="width=device-width, initial-scale=0.9">
     <style>
-        /* Fuerza el 67% en celular y PC */
+        /* Fuerza el 90% en celular y PC */
         html, body, [data-testid="stAppViewContainer"] {
-            zoom: 0.67;
+            zoom: 0.9;
         }
         /* Para que no se rompa en algunos celulares */
         @media screen and (max-width: 768px) {
             html {
-                zoom: 0.67 !important;
+                zoom: 0.9 !important;
             }
         }
     </style>
