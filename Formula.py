@@ -12,23 +12,34 @@ st.set_page_config(
 )
 st.set_page_config(layout="wide")
 
-# Aplica el zoom de forma segura sin romper el fondo vertical
+# Forzar a la app a estirarse verticalmente bajo el zoom del 67%
 st.html("""
 <style>
-/* El fondo y la estructura base se quedan al 100% siempre */
+/* Forzar que las capas base ocupen todo el alto real del navegador */
 html, body, .stApp {
     height: 100% !important;
+    min-height: 100vh !important;
     margin: 0;
     padding: 0;
+    background-color: transparent !important;
 }
 
-/* El zoom se aplica solo al contenedor visual interno */
+/* Aplicar zoom y compensar la pérdida de altura multiplicando por 1.5 (1 / 0.67) */
 .stAppViewContainer {
     zoom: 0.67;
     transform-origin: top left;
+    min-height: 150vh !important; 
+    height: auto !important;
 }
 
-/* Corrige la barra lateral para que mantenga el tamaño del zoom */
+/* Asegurar que el bloque principal de contenido se expanda */
+.stMainBlockContainer {
+    min-height: 150vh !important;
+    height: auto !important;
+    padding-bottom: 50px !important;
+}
+
+/* Mantener la barra lateral ajustada proporcionalmente */
 .stSidebarUserContent {
     zoom: 0.67;
 }
