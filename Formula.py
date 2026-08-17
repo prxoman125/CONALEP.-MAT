@@ -1,5 +1,6 @@
 import streamlit as st
 import math
+import time
 
 st.set_page_config(
     page_title="Aproximacion de Stirling",
@@ -61,7 +62,7 @@ st.subheader("Configuracion del valor $x$")
 x = st.number_input(
     label="Ingresa o ajusta el valor de x (x > 0):",
     min_value=0.1,
-    max_value=150.0,
+    max_value=120.0,
     value=5.0,
     step=0.1,
     format="%.4f"
@@ -78,8 +79,16 @@ def calcular_aproximacion(x_val):
 def calcular_exacto(x_val):
     return math.gamma(x_val + 1)
 
+# Medicion de tiempo para cada calculo
+t_inicio_exacto = time.perf_counter()
 valor_exacto = calcular_exacto(x)
+t_fin_exacto = time.perf_counter()
+tiempo_exacto = t_fin_exacto - t_inicio_exacto
+
+t_inicio_aprox = time.perf_counter()
 valor_aprox = calcular_aproximacion(x)
+t_fin_aprox = time.perf_counter()
+tiempo_aprox = t_fin_aprox - t_inicio_aprox
 
 error_absoluto = abs(valor_exacto - valor_aprox)
 error_relativo_pct = (error_absoluto / valor_exacto) * 100
@@ -91,9 +100,19 @@ st.subheader("Resultados")
 
 col1, col2 = st.columns(2)
 with col1:
-    st.metric(label="Valor Exacto (x!)", value=formato_dinamico(valor_exacto))
+    st.metric(
+        label="Valor Exacto (x!)", 
+        value=formato_dinamico(valor_exacto),
+        delta=f"Tiempo: {tiempo_exacto*1e6:.2f} µs",
+        delta_color="off"
+    )
 with col2:
-    st.metric(label="Valor Aproximado (Φ_A)", value=formato_dinamico(valor_aprox))
+    st.metric(
+        label="Valor Aproximado (Φ_A)", 
+        value=formato_dinamico(valor_aprox),
+        delta=f"Tiempo: {tiempo_aprox*1e6:.2f} µs",
+        delta_color="off"
+    )
 
 st.subheader("Margen de Error y Precision")
 
@@ -118,4 +137,4 @@ with st.expander("Ver desglose de los terminos de la formula"):
     st.write(f"- $1/(12x) =$ `{formato_dinamico(c1)}`")
     st.write(f"- $1/(288x^2) =$ `{formato_dinamico(c2)}`")
     st.write(f"- $-139/(51840x^3) =$ `{formato_dinamico(c3)}`")
-    st.write(f"- Factor de correccion total =$ `{formato_dinamico(factor_correccion)}`") 
+    st.write(f"- Factor de correccion total =$ `{formato_dinamico(factor_correccion)}`")
