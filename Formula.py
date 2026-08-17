@@ -10,7 +10,16 @@ st.set_page_config(
     layout="centered",
     initial_sidebar_state="collapsed"
 )
+st.set_page_config(layout="wide")
 
+# Aplica un zoom/escala simulada del 67%
+st.html("""
+<style>
+html {
+    zoom: 0.67;
+}
+</style>
+""")
 # Forzar modo oscuro + ocultar Share y GitHub
 st.markdown("""
     <style>
