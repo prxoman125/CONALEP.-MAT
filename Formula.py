@@ -24,9 +24,6 @@ st.markdown("""
     footer {visibility: hidden!important;}
     div[data-testid="stToolbar"] {display: none!important;}
     div[data-testid="stDecoration"] {display: none!important;}
-    html, body, [data-testid="stAppViewContainer"] {
-        color-scheme: dark!important;
-    }
     h1, h2, h3, p, label,.stMarkdown {
         color: white!important;
     }
@@ -39,17 +36,17 @@ st.markdown("""
     div[data-testid="stMetricLabel"] label, div[data-testid="stMetricValue"] div {
         color: white!important;
     }
-    /* LOGO CONALEP FLOTANTE */
+    /* LOGO CORREGIDO */
     .logo-conalep-flotante {
         position: fixed;
-        top: 15px;
-        left: 15px;
-        z-index: 999999;
-        width: 85px;
+        top: 60px;
+        left: 12px;
+        z-index: 9999999;
+        width: 90px;
         background: white;
-        padding: 5px 8px;
-        border-radius: 8px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+        padding: 6px;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.6);
     }
     .logo-conalep-flotante img {
         width: 100%;
@@ -58,7 +55,7 @@ st.markdown("""
     </style>
     
     <div class="logo-conalep-flotante">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/8/8e/Logo_del_CONALEP.png">
+        <img src="https://www.gob.mx/cms/uploads/attachment/file/344195/Logo_CONALEP.png" alt="CONALEP">
     </div>
 """, unsafe_allow_html=True)
 
