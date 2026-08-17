@@ -10,14 +10,7 @@ st.set_page_config(
     layout="centered",
     initial_sidebar_state="collapsed"
 )
-st.markdown("""
-    <meta name="viewport" content="width=device-width, initial-scale=0.4">
-    <style>
-        html, body {
-            overflow-y: auto !important;
-        }
-    </style>
-""", unsafe_allow_html=True)
+
 # Forzar modo oscuro + ocultar Share y GitHub
 st.markdown("""
     <style>
