@@ -10,18 +10,11 @@ st.set_page_config(
     layout="centered",
     initial_sidebar_state="collapsed"
 )
-# PON ESTO JUSTO DESPUES DE st.set_page_config
 st.markdown("""
-    <meta name="viewport" content="width=device-width, initial-scale=0.67, maximum-scale=0.67, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=0.67">
     <style>
-        .block-container {
-            padding-top: 1rem !important;
-            padding-bottom: 0rem !important;
-        }
-        /* Evita que se corte verticalmente */
-        [data-testid="stAppViewContainer"], [data-testid="stMain"] {
-            height: auto !important;
-            overflow: visible !important;
+        html, body {
+            overflow-y: auto !important;
         }
     </style>
 """, unsafe_allow_html=True)
