@@ -10,7 +10,21 @@ st.set_page_config(
     layout="centered",
     initial_sidebar_state="collapsed"
 )
-
+st.markdown("""
+    <meta name="viewport" content="width=device-width, initial-scale=0.67">
+    <style>
+        /* Fuerza el 67% en celular y PC */
+        html, body, [data-testid="stAppViewContainer"] {
+            zoom: 0.67;
+        }
+        /* Para que no se rompa en algunos celulares */
+        @media screen and (max-width: 768px) {
+            html {
+                zoom: 0.67 !important;
+            }
+        }
+    </style>
+""", unsafe_allow_html=True)
 # Forzar modo oscuro + ocultar Share y GitHub
 st.markdown("""
     <style>
