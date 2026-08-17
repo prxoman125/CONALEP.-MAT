@@ -3,6 +3,9 @@ import math
 import time
 import numpy as np
 import plotly.graph_objects as go
+import qrcode
+from io import BytesIO
+import base64
 
 st.set_page_config(
     page_title="Aproximacion de Stirling",
@@ -10,9 +13,8 @@ st.set_page_config(
     layout="centered",
     initial_sidebar_state="collapsed"
 )
-import base64
 
-# Carga el logo que acabas de subir
+# Carga el logo
 with open("Conalep-logo (1).png", "rb") as f:
     logo_b64 = base64.b64encode(f.read()).decode()
 
@@ -26,24 +28,41 @@ st.markdown(f"""
     footer{{visibility:hidden!important;}}
     h1,h2,h3,p,label,.stMarkdown{{color:white!important;}}
     
-    .logo-conalep-flotante{{
+    @keyframes flotarVertical {{
+        0% {{
+            transform: translateY(0px);
+        }}
+        50% {{
+            transform: translateY(8px);
+        }}
+        100% {{
+            transform: translateY(0px);
+        }}
+    }}
+
+    .logo-conalep-flotante {{
         position: fixed;
         top: 40px;
         right: 15px;
         z-index: 9999999;
         width: 100px;
-        background: white;
+        background: rgba(255, 255, 255, 0.90);
         padding: 6px;
         border-radius: 10px;
         box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+        animation: flotarVertical 4s ease-in-out infinite;
     }}
-    .logo-conalep-flotante img{{width:100%;display:block;}}
+    .logo-conalep-flotante img {{
+        width: 100%;
+        display: block;
+    }}
     </style>
     
     <div class="logo-conalep-flotante">
         <img src="data:image/png;base64,{logo_b64}">
     </div>
 """, unsafe_allow_html=True)
+
 st.title("Aproximacion de Stirling y Analisis de Error")
 st.markdown("Esta aplicacion evalua la **Serie de Stirling** para aproximar el factorial $x!$ (o $\Gamma(x+1)$) y la compara con el valor exacto.")
 
@@ -135,18 +154,15 @@ with st.expander("Ver desglose de los terminos de la formula"):
     st.write(f"- $-139/(51840x^3) =$ `{formato_dinamico(c3)}`")
     st.write(f"- Factor de correccion total =$ `{formato_dinamico(factor_correccion)}`")
 
-# ===== NUEVO: AGREGADO SIN MODIFICAR LO ANTERIOR =====
 st.divider()
 st.subheader("Analisis Avanzado")
 
-# Metrica extra en log10
 col_log1, col_log2 = st.columns(2)
 with col_log1:
     st.metric("Log10(Valor Exacto)", f"{math.log10(valor_exacto):.6f}")
 with col_log2:
     st.metric("Log10(Valor Aproximado)", f"{math.log10(valor_aprox):.6f}")
 
-# Grafica de convergencia
 st.markdown("#### Convergencia del Error Relativo (0.5 a tu x actual)")
 xs = np.linspace(0.5, x, 120)
 errores = []
@@ -172,9 +188,6 @@ fig.update_layout(
     margin=dict(l=20, r=20, t=20, b=20)
 )
 st.plotly_chart(fig, use_container_width=True)
-# ===== NUEVO: CODIGO QR - NO MODIFICA NADA ANTERIOR =====
-import qrcode
-from io import BytesIO
 
 st.divider()
 st.subheader("Compartir App")
