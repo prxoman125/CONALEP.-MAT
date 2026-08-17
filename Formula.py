@@ -10,25 +10,31 @@ st.set_page_config(
     layout="centered",
     initial_sidebar_state="collapsed"
 )
-# 1. Configuración de página obligatoria (SIEMPRE DE PRIMERO)
 st.set_page_config(layout="wide")
 
-# 2. Tu código de zoom mejorado para evitar recortes
+# Aplica el zoom de forma segura sin romper el fondo vertical
 st.html("""
 <style>
-html, body {
-    zoom: 0.67;
-    height: 100%;
+/* El fondo y la estructura base se quedan al 100% siempre */
+html, body, .stApp {
+    height: 100% !important;
     margin: 0;
     padding: 0;
-    overflow-y: auto !important;
 }
-.stApp {
-    height: 100vh !important;
+
+/* El zoom se aplica solo al contenedor visual interno */
+.stAppViewContainer {
+    zoom: 0.67;
+    transform-origin: top left;
+}
+
+/* Corrige la barra lateral para que mantenga el tamaño del zoom */
+.stSidebarUserContent {
+    zoom: 0.67;
 }
 </style>
 """)
- 
+
 # Forzar modo oscuro + ocultar Share y GitHub
 st.markdown("""
     <style>
