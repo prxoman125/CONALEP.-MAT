@@ -13,7 +13,7 @@ st.set_page_config(
 import base64
 
 # Carga el logo que acabas de subir
-with open("conalep.png", "rb") as f:
+with open("CONALEP-Logo (2).png", "rb") as f:
     logo_b64 = base64.b64encode(f.read()).decode()
 
 st.markdown(f"""
