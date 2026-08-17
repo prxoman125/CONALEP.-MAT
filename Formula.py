@@ -11,20 +11,20 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 st.markdown("""
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        /* Fuerza el 100% en celular y PC */
-        html, body, [data-testid="stAppViewContainer"] {
-            zoom: 0.9;
+        /* Ajuste estable al 67% sin parpadeo */
+        [data-testid="stAppViewContainer"] {
+            transform: scale(0.67);
+            transform-origin: top left;
+            width: 149.25%; /* 100 / 0.67 para que llene la pantalla */
+            height: 149.25%;
         }
-        /* Para que no se rompa en algunos celulares */
-        @media screen and (max-width: 768px) {
-            html {
-                zoom: 1.0 !important;
-            }
+        /* Quita el scroll horizontal feo */
+        html, body {
+            overflow-x: hidden;
         }
     </style>
-""", unsafe_allow_html=True)
+""", unsafe_allow_html=True) 
 # Forzar modo oscuro + ocultar Share y GitHub
 st.markdown("""
     <style>
