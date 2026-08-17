@@ -56,6 +56,22 @@ st.markdown(f"""
         width: 100%;
         display: block;
     }}
+
+    /* Media queries para adaptar perfectamente a dispositivos móviles */
+    @media (max-width: 640px) {{
+        .logo-conalep-flotante {{
+            width: 65px;
+            top: 10px;
+            right: 10px;
+        }}
+        h1 {{
+            font-size: 1.5rem !important;
+            padding-right: 75px;
+        }}
+        .stNumberInput, .stMetric {{
+            font-size: 0.9rem !important;
+        }}
+    }}
     </style>
     
     <div class="logo-conalep-flotante">
