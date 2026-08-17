@@ -22,6 +22,7 @@ st.markdown(f"""
     <style>
     .stApp {{
         background: linear-gradient(135deg, #021a0a 0%, #0a3d1a 40%, #000000 100%);
+        zoom: 0.8;
     }}
     header[data-testid="stHeader"]{{visibility:hidden!important;height:0!important;}}
     #MainMenu{{visibility:hidden!important;}} 
@@ -41,6 +42,7 @@ st.markdown(f"""
     }}
 
     .logo-conalep-flotante {{
+        zoom: 1.25;
         position: fixed;
         top: 20px;
         right: 15px;
@@ -221,3 +223,4 @@ with col_qr1:
 with col_qr2:
     st.write("Escanea este QR para abrir la app en otro dispositivo:")
     st.code(url_app, language="text")
+ 
