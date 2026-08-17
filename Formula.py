@@ -171,4 +171,22 @@ fig.update_layout(
     margin=dict(l=20, r=20, t=20, b=20)
 )
 st.plotly_chart(fig, use_container_width=True)
-st.caption("Nota: Eje Y en escala logarítmica. Se observa cómo el error cae drásticamente después de x > 10.") 
+# ===== NUEVO: CODIGO QR - NO MODIFICA NADA ANTERIOR =====
+import qrcode
+from io import BytesIO
+
+st.divider()
+st.subheader("Compartir App")
+
+url_app = "https://conalep-mat-eshlocixhqvewkleadq5wc.streamlit.app/"
+
+qr = qrcode.make(url_app)
+buf = BytesIO()
+qr.save(buf, format="PNG")
+
+col_qr1, col_qr2 = st.columns([1, 2])
+with col_qr1:
+    st.image(buf, width=200)
+with col_qr2:
+    st.write("Escanea este QR para abrir la app en otro dispositivo:")
+    st.code(url_app, language="text")
