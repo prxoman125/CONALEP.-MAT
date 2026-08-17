@@ -1,6 +1,8 @@
 import streamlit as st
 import math
 import time
+import numpy as np
+import plotly.graph_objects as go
 
 st.set_page_config(
     page_title="Aproximacion de Stirling",
@@ -12,12 +14,9 @@ st.set_page_config(
 # Forzar modo oscuro + ocultar Share y GitHub
 st.markdown("""
     <style>
-    /* Fondo degradado verde oscuro a negro */
-   .stApp {
+    .stApp {
         background: linear-gradient(135deg, #021a0a 0%, #0a3d1a 40%, #000000 100%);
     }
-
-    /* Ocultar barra superior completa (Share, GitHub, menu) */
     header[data-testid="stHeader"] {
         visibility: hidden!important;
         height: 0!important;
@@ -26,13 +25,9 @@ st.markdown("""
     footer {visibility: hidden!important;}
     div[data-testid="stToolbar"] {display: none!important;}
     div[data-testid="stDecoration"] {display: none!important;}
-
-    /* Forzar modo oscuro en todo el sistema */
     html, body, [data-testid="stAppViewContainer"] {
         color-scheme: dark!important;
     }
-
-    /* Textos en blanco para que se vea en fondo oscuro */
     h1, h2, h3, p, label,.stMarkdown {
         color: white!important;
     }
@@ -138,3 +133,42 @@ with st.expander("Ver desglose de los terminos de la formula"):
     st.write(f"- $1/(288x^2) =$ `{formato_dinamico(c2)}`")
     st.write(f"- $-139/(51840x^3) =$ `{formato_dinamico(c3)}`")
     st.write(f"- Factor de correccion total =$ `{formato_dinamico(factor_correccion)}`")
+
+# ===== NUEVO: AGREGADO SIN MODIFICAR LO ANTERIOR =====
+st.divider()
+st.subheader("Analisis Avanzado")
+
+# Metrica extra en log10
+col_log1, col_log2 = st.columns(2)
+with col_log1:
+    st.metric("Log10(Valor Exacto)", f"{math.log10(valor_exacto):.6f}")
+with col_log2:
+    st.metric("Log10(Valor Aproximado)", f"{math.log10(valor_aprox):.6f}")
+
+# Grafica de convergencia
+st.markdown("#### Convergencia del Error Relativo (0.5 a tu x actual)")
+xs = np.linspace(0.5, x, 120)
+errores = []
+for v in xs:
+    try:
+        ex = calcular_exacto(v)
+        ap = calcular_aproximacion(v)
+        err = abs(ex - ap) / ex * 100
+        errores.append(err)
+    except:
+        errores.append(0)
+
+fig = go.Figure()
+fig.add_trace(go.Scatter(x=xs, y=errores, mode='lines', line=dict(color='#00ff88', width=3), name='Error %'))
+fig.update_layout(
+    template="plotly_dark",
+    paper_bgcolor='rgba(0,0,0,0)',
+    plot_bgcolor='rgba(0,0,0,0)',
+    xaxis_title="Valor de x",
+    yaxis_title="Error Relativo (%)",
+    yaxis_type="log",
+    height=350,
+    margin=dict(l=20, r=20, t=20, b=20)
+)
+st.plotly_chart(fig, use_container_width=True)
+st.caption("Nota: Eje Y en escala logarítmica. Se observa cómo el error cae drásticamente después de x > 10.") 
