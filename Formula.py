@@ -79,6 +79,7 @@ st.markdown(f"""
     </div>
 """, unsafe_allow_html=True)
 
+st.markdown("#### CONALEP PLANTEL LEÓN 2")
 st.title("Aproximacion de Stirling y Analisis de Error")
 st.markdown("Esta aplicacion evalua la **Serie de Stirling** para aproximar el factorial $x!$ (o $\Gamma(x+1)$) y la compara con el valor exacto.")
 
@@ -200,8 +201,8 @@ fig.update_layout(
     xaxis_title="Valor de x",
     yaxis_title="Error Relativo (%)",
     yaxis_type="log",
-    height=350,
-    margin=dict(l=20, r=20, t=20, b=20)
+    height=270,
+    margin=dict(l=20, r=20, t=10, b=10)
 )
 st.plotly_chart(fig, use_container_width=True)
 
@@ -216,7 +217,7 @@ qr.save(buf, format="PNG")
 
 col_qr1, col_qr2 = st.columns([1, 2])
 with col_qr1:
-    st.image(buf, width=200)
+    st.image(buf, width=120)
 with col_qr2:
     st.write("Escanea este QR para abrir la app en otro dispositivo:")
     st.code(url_app, language="text")
