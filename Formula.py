@@ -15,7 +15,7 @@ st.markdown("""
     <style>
         /* Fuerza el 100% en celular y PC */
         html, body, [data-testid="stAppViewContainer"] {
-            zoom: 1.0;
+            zoom: 0.8;
         }
         /* Para que no se rompa en algunos celulares */
         @media screen and (max-width: 768px) {
