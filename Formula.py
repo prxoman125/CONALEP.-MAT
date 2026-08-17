@@ -46,7 +46,7 @@ st.markdown(f"""
         right: 15px;
         z-index: 9999999;
         width: 100px;
-        background: rgba(255, 255, 255, 0.90);
+        background: rgba(255, 255, 255, 0.80);
         padding: 6px;
         border-radius: 10px;
         box-shadow: 0 4px 12px rgba(0,0,0,0.6);
@@ -187,8 +187,7 @@ fig.update_layout(
     height=350,
     margin=dict(l=20, r=20, t=20, b=20)
 )
-# Se deshabilita el zoom y la barra de herramientas interactiva
-st.plotly_chart(fig, use_container_width=True, config={'displayModeBar': False, 'scrollZoom': False})
+st.plotly_chart(fig, use_container_width=True)
 
 st.divider()
 st.subheader("Compartir App")
@@ -205,4 +204,3 @@ with col_qr1:
 with col_qr2:
     st.write("Escanea este QR para abrir la app en otro dispositivo:")
     st.code(url_app, language="text")
- 
