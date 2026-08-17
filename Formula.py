@@ -29,7 +29,7 @@ st.markdown(f"""
     .logo-conalep-flotante{{
         position: fixed;
         top: 70px;
-        left: 15px;
+        right: 15px;
         z-index: 9999999;
         width: 85px;
         background: white;
