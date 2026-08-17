@@ -43,7 +43,7 @@ st.markdown(f"""
     .logo-conalep-flotante {{
         position: fixed;
         top: 20px;
-        right: -10px;
+        left: 10px;
         z-index: 9999999;
         width: 110px;
         background: rgba(255, 255, 255, 0.80);
