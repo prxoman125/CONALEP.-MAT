@@ -10,55 +10,40 @@ st.set_page_config(
     layout="centered",
     initial_sidebar_state="collapsed"
 )
-st.markdown("""
-    <meta name="viewport" content="width=device-width, initial-scale=0.67">
+import base64
+
+# Carga el logo que acabas de subir
+with open("conalep.png", "rb") as f:
+    logo_b64 = base64.b64encode(f.read()).decode()
+
+st.markdown(f"""
     <style>
-    .stApp {
+    .stApp {{
         background: linear-gradient(135deg, #021a0a 0%, #0a3d1a 40%, #000000 100%);
-    }
-    header[data-testid="stHeader"] {
-        visibility: hidden!important;
-        height: 0!important;
-    }
-    #MainMenu {visibility: hidden!important;}
-    footer {visibility: hidden!important;}
-    div[data-testid="stToolbar"] {display: none!important;}
-    div[data-testid="stDecoration"] {display: none!important;}
-    h1, h2, h3, p, label,.stMarkdown {
-        color: white!important;
-    }
-    div[data-testid="stMetric"] {
-        background-color: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        padding: 15px;
-        border-radius: 10px;
-    }
-    div[data-testid="stMetricLabel"] label, div[data-testid="stMetricValue"] div {
-        color: white!important;
-    }
-    /* LOGO CORREGIDO */
-    .logo-conalep-flotante {
+    }}
+    header[data-testid="stHeader"]{{visibility:hidden!important;height:0!important;}}
+    #MainMenu{{visibility:hidden!important;}} 
+    footer{{visibility:hidden!important;}}
+    h1,h2,h3,p,label,.stMarkdown{{color:white!important;}}
+    
+    .logo-conalep-flotante{{
         position: fixed;
-        top: 60px;
-        left: 12px;
+        top: 70px;
+        left: 15px;
         z-index: 9999999;
-        width: 90px;
+        width: 85px;
         background: white;
         padding: 6px;
         border-radius: 10px;
         box-shadow: 0 4px 12px rgba(0,0,0,0.6);
-    }
-    .logo-conalep-flotante img {
-        width: 100%;
-        display: block;
-    }
+    }}
+    .logo-conalep-flotante img{{width:100%;display:block;}}
     </style>
     
     <div class="logo-conalep-flotante">
-        <img src="https://www.gob.mx/cms/uploads/attachment/file/344195/Logo_CONALEP.png" alt="CONALEP">
+        <img src="data:image/png;base64,{logo_b64}">
     </div>
 """, unsafe_allow_html=True)
-
 st.title("Aproximacion de Stirling y Analisis de Error")
 st.markdown("Esta aplicacion evalua la **Serie de Stirling** para aproximar el factorial $x!$ (o $\Gamma(x+1)$) y la compara con el valor exacto.")
 
