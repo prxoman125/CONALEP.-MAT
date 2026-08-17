@@ -23,6 +23,7 @@ st.markdown(f"""
     .stApp {{
         background: linear-gradient(135deg, #021a0a 0%, #0a3d1a 40%, #000000 100%);
         zoom: 0.8;
+        min-height: 125vh;
     }}
     header[data-testid="stHeader"]{{visibility:hidden!important;height:0!important;}}
     #MainMenu{{visibility:hidden!important;}} 
