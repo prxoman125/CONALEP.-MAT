@@ -22,9 +22,6 @@ st.markdown(f"""
     <style>
     .stApp {{
         background: linear-gradient(135deg, #021a0a 0%, #0a3d1a 40%, #000000 100%);
-        zoom: 0.8;
-        min-height: 100vh;
-        padding-bottom: 80px;
     }}
     header[data-testid="stHeader"]{{visibility:hidden!important;height:0!important;}}
     #MainMenu{{visibility:hidden!important;}} 
@@ -44,7 +41,6 @@ st.markdown(f"""
     }}
 
     .logo-conalep-flotante {{
-        zoom: 1.25;
         position: fixed;
         top: 20px;
         right: 15px;
@@ -205,7 +201,7 @@ fig.update_layout(
     xaxis_title="Valor de x",
     yaxis_title="Error Relativo (%)",
     yaxis_type="log",
-    height=216,
+    height=270,
     margin=dict(l=20, r=20, t=10, b=10)
 )
 st.plotly_chart(fig, use_container_width=True)
@@ -221,7 +217,7 @@ qr.save(buf, format="PNG")
 
 col_qr1, col_qr2 = st.columns([1, 2])
 with col_qr1:
-    st.image(buf, width=96)
+    st.image(buf, width=120)
 with col_qr2:
     st.write("Escanea este QR para abrir la app en otro dispositivo:")
     st.code(url_app, language="text")
