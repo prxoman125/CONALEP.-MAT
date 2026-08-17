@@ -31,7 +31,7 @@ st.markdown(f"""
         top: 70px;
         right: 15px;
         z-index: 9999999;
-        width: 85px;
+        width: 100px;
         background: white;
         padding: 6px;
         border-radius: 10px;
