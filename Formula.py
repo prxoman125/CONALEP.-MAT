@@ -10,9 +10,8 @@ st.set_page_config(
     layout="centered",
     initial_sidebar_state="collapsed"
 )
-
-# Forzar modo oscuro + ocultar Share y GitHub
 st.markdown("""
+    <meta name="viewport" content="width=device-width, initial-scale=0.67">
     <style>
     .stApp {
         background: linear-gradient(135deg, #021a0a 0%, #0a3d1a 40%, #000000 100%);
@@ -40,7 +39,27 @@ st.markdown("""
     div[data-testid="stMetricLabel"] label, div[data-testid="stMetricValue"] div {
         color: white!important;
     }
+    /* LOGO CONALEP FLOTANTE */
+    .logo-conalep-flotante {
+        position: fixed;
+        top: 15px;
+        left: 15px;
+        z-index: 999999;
+        width: 85px;
+        background: white;
+        padding: 5px 8px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    }
+    .logo-conalep-flotante img {
+        width: 100%;
+        display: block;
+    }
     </style>
+    
+    <div class="logo-conalep-flotante">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/8/8e/Logo_del_CONALEP.png">
+    </div>
 """, unsafe_allow_html=True)
 
 st.title("Aproximacion de Stirling y Analisis de Error")
