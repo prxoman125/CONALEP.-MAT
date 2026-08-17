@@ -10,21 +10,21 @@ st.set_page_config(
     layout="centered",
     initial_sidebar_state="collapsed"
 )
+# PON ESTO JUSTO DESPUES DE st.set_page_config
 st.markdown("""
+    <meta name="viewport" content="width=device-width, initial-scale=0.67, maximum-scale=0.67, user-scalable=yes">
     <style>
-        /* Ajuste estable al 67% sin parpadeo */
-        [data-testid="stAppViewContainer"] {
-            transform: scale(0.67);
-            transform-origin: top left;
-            width: 149.25%; /* 100 / 0.67 para que llene la pantalla */
-            height: 149.25%;
+        .block-container {
+            padding-top: 1rem !important;
+            padding-bottom: 0rem !important;
         }
-        /* Quita el scroll horizontal feo */
-        html, body {
-            overflow-x: hidden;
+        /* Evita que se corte verticalmente */
+        [data-testid="stAppViewContainer"], [data-testid="stMain"] {
+            height: auto !important;
+            overflow: visible !important;
         }
     </style>
-""", unsafe_allow_html=True) 
+""", unsafe_allow_html=True)
 # Forzar modo oscuro + ocultar Share y GitHub
 st.markdown("""
     <style>
