@@ -42,7 +42,7 @@ st.markdown(f"""
 
     .logo-conalep-flotante {{
         position: fixed;
-        top: 30px;
+        top: 20px;
         right: 15px;
         z-index: 9999999;
         width: 100px;
@@ -187,7 +187,8 @@ fig.update_layout(
     height=350,
     margin=dict(l=20, r=20, t=20, b=20)
 )
-st.plotly_chart(fig, use_container_width=True)
+# Se deshabilita el zoom y la barra de herramientas interactiva
+st.plotly_chart(fig, use_container_width=True, config={'displayModeBar': False, 'scrollZoom': False})
 
 st.divider()
 st.subheader("Compartir App")
@@ -204,3 +205,4 @@ with col_qr1:
 with col_qr2:
     st.write("Escanea este QR para abrir la app en otro dispositivo:")
     st.code(url_app, language="text")
+ 
