@@ -10,41 +10,6 @@ st.set_page_config(
     layout="centered",
     initial_sidebar_state="collapsed"
 )
-st.set_page_config(layout="wide")
-
-# Forzar a la app a estirarse verticalmente bajo el zoom del 67%
-st.html("""
-<style>
-/* Forzar que las capas base ocupen todo el alto real del navegador */
-html, body, .stApp {
-    height: 100% !important;
-    min-height: 100vh !important;
-    margin: 0;
-    padding: 0;
-    background-color: transparent !important;
-}
-
-/* Aplicar zoom y compensar la pérdida de altura multiplicando por 1.5 (1 / 0.67) */
-.stAppViewContainer {
-    zoom: 0.67;
-    transform-origin: top left;
-    min-height: 150vh !important; 
-    height: auto !important;
-}
-
-/* Asegurar que el bloque principal de contenido se expanda */
-.stMainBlockContainer {
-    min-height: 150vh !important;
-    height: auto !important;
-    padding-bottom: 50px !important;
-}
-
-/* Mantener la barra lateral ajustada proporcionalmente */
-.stSidebarUserContent {
-    zoom: 0.67;
-}
-</style>
-""")
 
 # Forzar modo oscuro + ocultar Share y GitHub
 st.markdown("""
