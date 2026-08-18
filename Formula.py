@@ -180,23 +180,37 @@ with col_log1:
 with col_log2:
     st.metric("Log10(Valor Aproximado)", f"{math.log10(valor_aprox):.6f}")
 
-st.markdown("#### Comparativa de Variable X y Tiempo de Cálculo")
+st.markdown("#### Comparativa de Variable X y Tiempos de Cálculo")
 
 # Generamos pasos intermedios para la animación de las barras al cambiar X
 pasos_animacion = np.linspace(max(1.0, x - 5), x, 10)
 frames = []
 for p in pasos_animacion:
-    t_start = time.perf_counter()
+    t_start_ex = time.perf_counter()
+    _ = calcular_exacto(p)
+    t_end_ex = time.perf_counter()
+    t_ex_us = (t_end_ex - t_start_ex) * 1e6
+
+    t_start_ap = time.perf_counter()
     _ = calcular_aproximacion(p)
-    t_end = time.perf_counter()
-    t_calc_us = (t_end - t_start) * 1e6
+    t_end_ap = time.perf_counter()
+    t_ap_us = (t_end_ap - t_start_ap) * 1e6
+
     frames.append(go.Frame(
-        data=[go.Bar(x=['Valor de X', 'Tiempo (µs)'], y=[p, t_calc_us], marker_color=['#00ff88', '#00bfff'])],
+        data=[go.Bar(
+            x=['Valor de X', 'Tiempo Aprox (µs)', 'Tiempo Exacto (µs)'], 
+            y=[p, t_ap_us, t_ex_us], 
+            marker_color=['#00ff88', '#00bfff', '#ffaa00']
+        )],
         name=str(p)
     ))
 
 fig = go.Figure(
-    data=[go.Bar(x=['Valor de X', 'Tiempo (µs)'], y=[x, (tiempo_aprox)*1e6], marker_color=['#00ff88', '#00bfff'])],
+    data=[go.Bar(
+        x=['Valor de X', 'Tiempo Aprox (µs)', 'Tiempo Exacto (µs)'], 
+        y=[x, tiempo_aprox * 1e6, tiempo_exacto * 1e6], 
+        marker_color=['#00ff88', '#00bfff', '#ffaa00']
+    )],
     layout=go.Layout(
         template="plotly_dark",
         paper_bgcolor='rgba(0,0,0,0)',
@@ -208,7 +222,7 @@ fig = go.Figure(
     frames=frames
 )
 
-st.plotly_chart(fig, use_container_width=True)
+st.plotly_chart(fig, use_container_width=True, config={'displayModeBar': False})
 
 st.divider()
 st.subheader("Compartir App")
