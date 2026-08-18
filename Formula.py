@@ -42,11 +42,11 @@ st.markdown(f"""
 
     .logo-conalep-flotante {{
         position: fixed;
-        top: 20px;
-        right: 100px;
+        top: 15px;
+        right: 15px;
         z-index: 9999999;
         width: 110px;
-        background: rgba(255, 255, 255, 0.70);
+        background: rgba(255, 255, 255, 0.50);
         padding: 6px;
         border-radius: 10px;
         box-shadow: 0 4px 12px rgba(0,0,0,0.6);
@@ -62,7 +62,7 @@ st.markdown(f"""
         .logo-conalep-flotante {{
             width: 65px;
             top: 10px;
-            right: 40px;
+            right: 10px;
         }}
         h1 {{
             font-size: 1.5rem !important;
@@ -192,16 +192,16 @@ for v in xs:
     except:
         errores.append(0)
 
-fig = go.Figure()
-fig.add_trace(go.Bar(x=xs, y=errores, marker_color='#00ff88', name='Error %'))
+fig = go.Figure(data=[go.Pie(
+    labels=[f"x={v:.1f}" for v in xs],
+    values=errores,
+    hole=0.3
+)])
 fig.update_layout(
     template="plotly_dark",
     paper_bgcolor='rgba(0,0,0,0)',
     plot_bgcolor='rgba(0,0,0,0)',
-    xaxis_title="Valor de x",
-    yaxis_title="Error Relativo (%)",
-    yaxis_type="log",
-    height=270,
+    height=350,
     margin=dict(l=20, r=20, t=10, b=10)
 )
 st.plotly_chart(fig, use_container_width=True)
@@ -220,3 +220,4 @@ with col_qr1:
     st.image(buf, width=120)
 with col_qr2:
     st.write("Escanea este QR para abrir la app en otro dispositivo:")
+ 
