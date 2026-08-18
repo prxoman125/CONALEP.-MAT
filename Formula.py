@@ -43,10 +43,10 @@ st.markdown(f"""
     .logo-conalep-flotante {{
         position: fixed;
         top: 20px;
-        right: 40px;
+        right: 70px;
         z-index: 9999999;
         width: 110px;
-        background: rgba(255, 255, 255, 0.80);
+        background: rgba(255, 255, 255, 0.70);
         padding: 6px;
         border-radius: 10px;
         box-shadow: 0 4px 12px rgba(0,0,0,0.6);
@@ -62,7 +62,7 @@ st.markdown(f"""
         .logo-conalep-flotante {{
             width: 65px;
             top: 10px;
-            right: 10px;
+            right: 40px;
         }}
         h1 {{
             font-size: 1.5rem !important;
@@ -92,9 +92,9 @@ st.divider()
 
 st.subheader("Configuracion del valor $x$")
 x = st.number_input(
-    label="Ingresa o ajusta el valor de x (x > 0):",
-    min_value=0.1,
-    max_value=120.0,
+    label="Ingresa o ajusta el valor de x (x >= 1):",
+    min_value=1.0,
+    max_value=150.0,
     value=5.0,
     step=0.1,
     format="%.4f"
@@ -180,8 +180,8 @@ with col_log1:
 with col_log2:
     st.metric("Log10(Valor Aproximado)", f"{math.log10(valor_aprox):.6f}")
 
-st.markdown("#### Convergencia del Error Relativo (0.5 a tu x actual)")
-xs = np.linspace(0.5, x, 120)
+st.markdown("#### Convergencia del Error Relativo (1 a tu x actual)")
+xs = np.linspace(1.0, x, 30)
 errores = []
 for v in xs:
     try:
@@ -193,7 +193,7 @@ for v in xs:
         errores.append(0)
 
 fig = go.Figure()
-fig.add_trace(go.Scatter(x=xs, y=errores, mode='lines', line=dict(color='#00ff88', width=3), name='Error %'))
+fig.add_trace(go.Bar(x=xs, y=errores, marker_color='#00ff88', name='Error %'))
 fig.update_layout(
     template="plotly_dark",
     paper_bgcolor='rgba(0,0,0,0)',
@@ -220,4 +220,3 @@ with col_qr1:
     st.image(buf, width=120)
 with col_qr2:
     st.write("Escanea este QR para abrir la app en otro dispositivo:")
-    st.code(url_app, language="text")
