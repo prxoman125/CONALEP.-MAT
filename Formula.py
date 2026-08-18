@@ -180,30 +180,34 @@ with col_log1:
 with col_log2:
     st.metric("Log10(Valor Aproximado)", f"{math.log10(valor_aprox):.6f}")
 
-st.markdown("#### Convergencia del Error Relativo (1 a tu x actual)")
-xs = np.linspace(1.0, x, 30)
-errores = []
-for v in xs:
-    try:
-        ex = calcular_exacto(v)
-        ap = calcular_aproximacion(v)
-        err = abs(ex - ap) / ex * 100
-        errores.append(err)
-    except:
-        errores.append(0)
+st.markdown("#### Comparativa de Variable X y Tiempo de Cálculo")
 
-fig = go.Figure(data=[go.Pie(
-    labels=[f"x={v:.1f}" for v in xs],
-    values=errores,
-    hole=0.3
-)])
-fig.update_layout(
-    template="plotly_dark",
-    paper_bgcolor='rgba(0,0,0,0)',
-    plot_bgcolor='rgba(0,0,0,0)',
-    height=350,
-    margin=dict(l=20, r=20, t=10, b=10)
+# Generamos pasos intermedios para la animación de las barras al cambiar X
+pasos_animacion = np.linspace(max(1.0, x - 5), x, 10)
+frames = []
+for p in pasos_animacion:
+    t_start = time.perf_counter()
+    _ = calcular_aproximacion(p)
+    t_end = time.perf_counter()
+    t_calc_us = (t_end - t_start) * 1e6
+    frames.append(go.Frame(
+        data=[go.Bar(x=['Valor de X', 'Tiempo (µs)'], y=[p, t_calc_us], marker_color=['#00ff88', '#00bfff'])],
+        name=str(p)
+    ))
+
+fig = go.Figure(
+    data=[go.Bar(x=['Valor de X', 'Tiempo (µs)'], y=[x, (tiempo_aprox)*1e6], marker_color=['#00ff88', '#00bfff'])],
+    layout=go.Layout(
+        template="plotly_dark",
+        paper_bgcolor='rgba(0,0,0,0)',
+        plot_bgcolor='rgba(0,0,0,0)',
+        height=300,
+        margin=dict(l=20, r=20, t=10, b=10),
+        transition=dict(duration=500, easing='cubic-in-out')
+    ),
+    frames=frames
 )
+
 st.plotly_chart(fig, use_container_width=True)
 
 st.divider()
