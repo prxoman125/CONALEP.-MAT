@@ -94,7 +94,7 @@ st.subheader("Configuracion del valor $x$")
 x = st.number_input(
     label="Ingresa o ajusta el valor de x (x >= 1):",
     min_value=1.0,
-    max_value=150.0,
+    max_value=170.0,
     value=5.0,
     step=0.1,
     format="%.4f"
